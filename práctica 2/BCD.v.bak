@@ -1,0 +1,52 @@
+module BCD(
+input[3:0]iEntrada,
+input iclk,
+output[6:0]oSalida
+);
+
+
+//reg rOperacion1;
+//assign oa=(iA|iB|iC|~iD)&(iA|~iB|iD)&rOperacion1&(~iA|iB|~iC|~iD);
+
+
+//always @ *
+//begin
+//rOperacion1=(~iA|~iB|iC|~iD);
+//end
+
+
+reg [6:0]rsalida_Q;
+reg [6:0]rsalida_S;
+
+
+assign oSalida = rsalida_S;
+
+
+// bloque combinacional
+always @ *
+case (iEntrada)
+4'b0000 = rsalida_S[6:0] <= 7'b1111110;
+4'b0001 = rsalida_S[6:0] <= 7'b0110000;
+4'b0010 = rsalida_S[6:0] <= 7'b1101101;
+4'b0011 = rsalida_S[6:0] <= 7'b1111001;
+4'b0100 = rsalida_S[6:0] <= 7'b0110011;
+4'b0101 = rsalida_S[6:0] <= 7'b1011011;
+4'b0110 = rsalida_S[6:0] <= 7'b0011111;
+4'b0111 = rsalida_S[6:0] <= 7'b1110000;
+4'b1000 = rsalida_S[6:0] <= 7'b1111111;
+4'b1001 = rsalida_S[6:0] <= 7'b1110011;
+4'b1010 = rsalida_S[6:0] <= 7'b1110111;
+4'b1011 = rsalida_S[6:0] <= 7'b0011111;
+4'b1100 = rsalida_S[6:0] <= 7'b1001110;
+4'b1101 = rsalida_S[6:0] <= 7'b0111101;
+4'b1110 = rsalida_S[6:0] <= 7'b1001111;
+4'b1111 = rsalida_S[6:0] <= 7'b1000111;
+
+//bloque secuencial
+always @ (posedge iclk)
+begin
+rsalida_Q <= rsalida_S;
+end
+
+
+endmodule
